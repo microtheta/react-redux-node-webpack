@@ -14,7 +14,7 @@ results
 tmp
 
 #Build
-public/css/main.css
+public/dist
 
 # API keys and secrets
 .env
