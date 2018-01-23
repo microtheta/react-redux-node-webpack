@@ -1,9 +1,21 @@
-.nav-bar-bottom-shadow {
-  box-shadow: 0px 8px 15px -9px #22252a;
-}
 .navbar.bg-static {
   background: url('/images/bg.jpg');
   border-bottom: 1px solid #e3e3e3;
+  height: 40px;
   margin-bottom: 10px;
   transition: box-shadow 0.3s ease-in-out;
+  &.nav-bar-bottom-shadow {
+    box-shadow: 0px 8px 15px -9px #22252a;
+  }
+  .navbar-brand {
+    min-width: 28px;
+    .fa-2x {
+      font-size: 1.5em;
+      color: hsla(0, 0%, 0%, 0.402);
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: rgba(0, 0, 0, 0.702);
+      }
+    }
+  }
 }

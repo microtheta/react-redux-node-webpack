@@ -8,8 +8,11 @@ html
     title #{title}
     link(rel='shortcut icon', href='/favicon.png')
 
-    link(rel="stylesheet", href="/dist/bundle.css")
-    script(src='/dist/bundle.js')
+    if assets
+      if assets['app.css']
+        link(rel="stylesheet", href='/dist/'+assets['app.css'])
+      if assets['app.js']
+        script(src='/dist/'+assets['app.js'])
 
     style.
       body {
@@ -19,7 +22,7 @@ html
   body
     include partials/header
 
-    .container(id="root")
+    .container-fluid(id="root")
       block content
 
     include partials/footer

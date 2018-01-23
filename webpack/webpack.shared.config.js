@@ -1,17 +1,26 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
-const distPath = path.resolve(__dirname, '../public/dist');
+const distPath = path.resolve(__dirname, '../public/dist/');
 const devEnv = process.env.NODE_ENV !== 'production';
 
+var entries = {
+  app: ['./client/index.js']
+};
+
+if(devEnv) {
+  entries.app.push('webpack-hot-middleware/client?reload=true')
+};
+
 module.exports = {
-  entry: ['./client/index.js'],
+  entry:  entries,
 
   output: {
     path: distPath,
-    filename: 'bundle.js',
-    publicPath: '/dist'
+    filename: devEnv? '[name].js' : '[name].[hash].js',
+    publicPath: '/dist/'
   },
 
   resolve: {
@@ -43,7 +52,7 @@ module.exports = {
               },
             },
           ],
-        }),
+        })
       },
       {
         test: /\.css$/,
@@ -88,9 +97,12 @@ module.exports = {
       root: path.resolve(__dirname, '../')
     }),
     new ExtractTextPlugin({
-      filename: 'bundle.css',
-      disable: false,
+      filename:  devEnv? '[name].css' : '[name].[hash].css',
+      disable: devEnv,
       allChunks: true,
+    }),
+    new WebpackAssetsManifest({
+      writeToDisk: true
     })
 
   ]

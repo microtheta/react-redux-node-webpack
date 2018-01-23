@@ -1,16 +1,16 @@
-const bodyParser = require('body-parser');
-const compression = require('compression');
-// const dotenv = require('dotenv');
-const errorHandler = require('errorhandler');
-const express = require('express');
-const expressStatusMonitor = require('express-status-monitor');
-const logger = require('morgan');
-// const multer = require('multer');
-// const upload = multer({ dest: path.join(__dirname, 'uploads') });
-// const passport = require('passport');
-const path = require('path');
+module.exports = function(config) {
+  const bodyParser = require('body-parser');
+  const compression = require('compression');
+  // const dotenv = require('dotenv');
+  const errorHandler = require('errorhandler');
+  const express = require('express');
+  const expressStatusMonitor = require('express-status-monitor');
+  const logger = require('morgan');
+  // const multer = require('multer');
+  // const upload = multer({ dest: path.join(__dirname, 'uploads') });
+  // const passport = require('passport');
+  const path = require('path');
 
-function server(config) {
   /**
    * Create Express server.
    */
@@ -36,8 +36,11 @@ function server(config) {
   });
 
   app.get('/', (req, res) => {
+    const assetsManifest = require('../public/dist/manifest.json');
+
     res.render('home', {
-      title: 'Home'
+      title: 'Home',
+      assets: assetsManifest
     });
   });
 
@@ -55,5 +58,3 @@ function server(config) {
   });
   return app;
 }
-
-module.exports = server;

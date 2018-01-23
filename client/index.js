@@ -1,5 +1,12 @@
-import './utils/responsive';
+import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.scss';
 
-console.log('Hello pack!');
+import './utils/responsive';
+
+console.log('Hello pack!!');
+
+
+if(module.hot) {
+  module.hot.accept();
+}

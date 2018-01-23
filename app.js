@@ -19,5 +19,6 @@ if(process.env.NODE_ENV !== 'production') {
     publicPath: webPackConfig.output.publicPath
   }));
 
-  server.use(webpackHotMiddleware(compiler));
+  server.use(webpackHotMiddleware(compiler, {
+  }));
 }
