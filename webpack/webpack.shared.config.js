@@ -7,7 +7,7 @@ const distPath = path.resolve(__dirname, '../public/dist/');
 const devEnv = process.env.NODE_ENV !== 'production';
 
 var entries = {
-  app: ['./client/index.js']
+  app: ['./client/app/index.js']
 };
 
 if(devEnv) {
