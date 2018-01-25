@@ -6,29 +6,36 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const distPath = path.resolve(__dirname, '../public/dist/');
 const devEnv = process.env.NODE_ENV !== 'production';
 
-var entries = {
+const entries = {
   app: ['./client/app/index.js']
 };
 
-if(devEnv) {
-  entries.app.push('webpack-hot-middleware/client?reload=true')
-};
+if (devEnv) {
+  entries.app.push('webpack-hot-middleware/client?reload=true');
+}
 
 module.exports = {
-  entry:  entries,
+  entry: entries,
 
   output: {
     path: distPath,
-    filename: devEnv? '[name].js' : '[name].[hash].js',
+    filename: devEnv ? '[name].js' : '[name].[hash].js',
+    chunkFilename: '[name].[chunkHash].js',
     publicPath: '/dist/'
   },
 
   resolve: {
-    extensions: [".js", ".css", ".scss"]
+    extensions: ['.js', '.css', '.scss']
   },
 
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -46,7 +53,8 @@ module.exports = {
                 sourceMap: devEnv,
               },
             },
-            { loader: 'sass-loader',
+            {
+              loader: 'sass-loader',
               options: {
                 sourceMap: devEnv,
               },
@@ -97,7 +105,7 @@ module.exports = {
       root: path.resolve(__dirname, '../')
     }),
     new ExtractTextPlugin({
-      filename:  devEnv? '[name].css' : '[name].[hash].css',
+      filename: devEnv ? '[name].css' : '[name].[hash].css',
       disable: devEnv,
       allChunks: true,
     }),

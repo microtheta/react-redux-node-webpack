@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "production": "NODE_ENV='production' webpack --config webpack/webpack.prod.config.js && NODE_ENV='production' node app.js",
-    "eslint": "eslint **/*.js"
+    "eslint": "eslint server/"
   },
   "nodemonConfig": {
     "ignore": [
@@ -33,6 +33,7 @@
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.4",
     "webpack-hot-middleware": "^2.21.0",
@@ -40,14 +41,19 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.9",
     "eslint": "^4.16.0",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "node-sass": "^4.7.2",
@@ -56,23 +62,5 @@
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "webpack-assets-manifest": "^1.0.0"
-  },
-  "eslintConfig": {
-    "extends": "airbnb-base",
-    "rules": {
-      "comma-dangle": 0,
-      "consistent-return": 0,
-      "no-param-reassign": 0,
-      "no-underscore-dangle": 0,
-      "no-shadow": 0,
-      "no-console": 0,
-      "no-plusplus": 0,
-      "no-unused-expressions": 0
-    },
-    "env": {
-      "jasmine": true,
-      "mocha": true,
-      "node": true
-    }
   }
 }

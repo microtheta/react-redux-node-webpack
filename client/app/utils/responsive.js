@@ -6,7 +6,7 @@ window.onload = function() {
   }
 
   //add shadow on scroll
-  window.addEventListener('scroll', function(e) {
+  window.addEventListener('scroll', function() {
     const element = document.getElementById("topNav");
     if(!element) {
       return

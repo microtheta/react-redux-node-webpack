@@ -5,4 +5,4 @@ const webpack = require('webpack');
 
 module.exports = merge(sharedConfig, {
 
-})
+});
