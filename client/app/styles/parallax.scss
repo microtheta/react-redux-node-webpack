@@ -8,8 +8,6 @@ $colors:violet, indigo,blue, green, yellow, orange, red;
 $parallax-offset: 30vh;
 $content-offset: 40vh;
 $transition-speed: 1.2s;
-$slide-number: 3;
-
 
 
 .parallax-main {
@@ -24,6 +22,7 @@ $slide-number: 3;
   backface-visibility: hidden;
   height: 100vh + $parallax-offset - 10vh;
   position: fixed;
+  padding: 10px;
   width: 100%;
   transform: translateY($parallax-offset);
   @include transition($transition-speed, all, cubic-bezier(0.22, 0.44, 0, 1));
@@ -39,25 +38,10 @@ $slide-number: 3;
     background-color: rgba(0,0,0,.3);
   }
   &:nth-child(1) {
-    background-image: url(https://s8.postimg.org/lf2udl5np/4_Aihmii.jpg);
     transform: translateY(-$parallax-offset / 2);
     .content-wrapper {
       transform: translateY($parallax-offset /2);
     }
-  }
-  &:nth-child(2) {
-    background-image: url(https://s8.postimg.org/ow4wgk4px/ugqti_Lg.jpg);
-  }
-  &:nth-child(3) {
-    background-image: url(https://s8.postimg.org/grwsbtiat/x_ZMOBTj.jpg);
-  }
-}
-
-/* Set stacking context of slides */
-@for $i from 1 to ($slide-number + 1) {
-  .background:nth-child(#{$i}) {
-      background-color: lighten(nth($colors, ($i%7)), 20%);
-      z-index: ($slide-number + 1) - $i;
   }
 }
 
@@ -79,6 +63,9 @@ $slide-number: 3;
   &-title {
     font-size: 12vh;
     line-height: 1.4;
+    @media (max-width: 576px) {
+      font-size: 12vw;
+    }
   }
 }
 

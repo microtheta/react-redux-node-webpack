@@ -16,6 +16,7 @@ class Parallax extends Component {
     this.delta = 0;
     this.mousewheelEvent = this.isFirefox ? "DOMMouseScroll" : "wheel";
     this.eventListener;
+    this.touchStartListener;
 
     this.parallaxScroll = this.parallaxScroll.bind(this);
     this.slideDurationTimeout = this.slideDurationTimeout.bind(this);
@@ -28,11 +29,18 @@ class Parallax extends Component {
     this.totalSlideNumber = document.getElementsByClassName("background").length;
     // ------------- ADD EVENT LISTENER ------------- //
     this.eventListener = _.throttle(this.parallaxScroll, 60);
+    this.touchStartListener = (e) => { this.delta = e.changedTouches[0].clientY };
     window.addEventListener(this.mousewheelEvent, this.eventListener, false);
+    window.addEventListener("touchstart", this.touchStartListener, false);
+    window.addEventListener("touchend", this.eventListener, false);
   }
 
   parallaxScroll(evt) {
-    if (this.isFirefox) {
+    console.log(evt)
+    if(evt.type === 'touchend') {
+      this.delta = evt.changedTouches[0].clientY - this.delta;
+    }
+    else if (this.isFirefox) {
       //Set delta for Firefox
       this.delta = evt.detail * (-120);
     } else if (this.isIe) {
@@ -85,33 +93,55 @@ class Parallax extends Component {
 
   componentWillUnmount() {
     // ------------- ADD EVENT LISTENER ------------- //
-    window.removeEventListener(this.mousewheelEvent, this.eventListener, false)
+    window.removeEventListener(this.mousewheelEvent, this.eventListener, false);
+    window.removeEventListener("touchstart", this.touchStartListener, false);
+    window.removeEventListener("touchend", this.eventListener, false);
   }
 
   render() {
+    const { sections } = this.props;
     return (
       <div className="parallax-main">
-        <section className="background">
-          <div className="content-wrapper">
-            <p className="content-title">Full Page Parallax Effect</p>
-            <p className="content-subtitle">Scroll down and up to see the effect!</p>
-          </div>
-        </section>
-        <section className="background">
-          <div className="content-wrapper">
-            <p className="content-title">Cras lacinia non eros nec semper.</p>
-            <p className="content-subtitle">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras ut massa mattis nibh semper pretium.</p>
-          </div>
-        </section>
-        <section className="background">
-          <div className="content-wrapper">
-            <p className="content-title">Etiam consequat lectus.</p>
-            <p className="content-subtitle">Nullam tristique urna sed tellus ornare congue. Etiam vitae erat at nibh aliquam dapibus.</p>
-          </div>
-        </section>
+        {
+          sections.map((section, i) => (
+            <section key={i} className="background" style={{
+              zIndex: sections.length-i,
+              backgroundColor: section.color,
+              backgroundImage: `url(${section.image})`
+            }}>
+              <div className="content-wrapper">
+                <p className="content-title">{section.title}</p>
+                <p className="content-subtitle">{section.subtitle}</p>
+              </div>
+            </section>
+          ))
+        }
       </div>
     );
   }
 }
+
+Parallax.defaultProps = {
+  sections: [
+    {
+      title: 'Full Page Parallax Effect',
+      subtitle: 'croll down and up to see the effect!',
+      image: 'https://s8.postimg.org/lf2udl5np/4_Aihmii.jpg',
+      color: 'red'
+    },
+    {
+      title: 'Cras lacinia non eros nec semper.',
+      subtitle: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras ut massa mattis nibh semper pretium.',
+      image: 'https://s8.postimg.org/ow4wgk4px/ugqti_Lg.jpg',
+      color: 'green'
+    },
+    {
+      title: 'Etiam consequat lectus.',
+      subtitle: 'Nullam tristique urna sed tellus ornare congue. Etiam vitae erat at nibh aliquam dapibus.',
+      image: 'https://s8.postimg.org/grwsbtiat/x_ZMOBTj.jpg',
+      color: 'blue'
+    }
+  ],
+};
 
 export default Parallax;
