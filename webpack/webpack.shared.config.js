@@ -11,7 +11,7 @@ const entries = {
 };
 
 if (devEnv) {
-  entries.app.push('webpack-hot-middleware/client?reload=true');
+  entries.app.push('webpack-hot-middleware/client?reload=false');
 }
 
 module.exports = {

@@ -37,13 +37,22 @@ const Home = (props) => (
   </Bundler>
 );
 
+const Parallax = (props) => (
+  <Bundler load={() => import('./Parallax/Parallax')}>
+    {(ParallaxModule) => <ParallaxModule {...props} />}
+  </Bundler>
+);
+
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
         { /* ConnectedRouter will use the store from Provider automatically */ }
         <ConnectedRouter history={history}>
-          <Route exact path="/" component={Home} />
+          <div>
+            <Route exact path="/" component={Home} />
+            <Route path="/parallax" component={Parallax} />
+          </div>
         </ConnectedRouter>
       </Provider>
     );
