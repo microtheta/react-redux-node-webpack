@@ -1,6 +1,6 @@
 .navbar.bg-static {
   background: url('/images/bg.jpg');
-  border-bottom: 1px solid #e3e3e3;
+  border-bottom: 1px solid $border-color-light;
   height: 40px;
   margin-bottom: 10px;
   transition: box-shadow 0.3s ease-in-out;
