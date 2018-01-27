@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = merge(sharedConfig, {
 
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
 
   stats: {
     errorDetails: true

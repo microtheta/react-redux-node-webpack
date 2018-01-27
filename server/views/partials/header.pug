@@ -1,17 +1,17 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar.sticky-top.navbar-light.bg-static(id="topNav")
   .container-fluid
-    a.navbar-brand(href="#")
+    a.navbar-brand(href="/", onclick="return ReactRouterLink(this, '/')")
       i.fa.fa-snowflake-o.fa-2x
     button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
         li.nav-item
-          a.nav-link(href="/")
+          a.nav-link(href="/", onclick="return ReactRouterLink(this, '/')")
             | Home
             span.sr-only (current)
         li.nav-item
-          a.nav-link(href="#") Link
+          a.nav-link(href="/link", onclick="return ReactRouterLink(this, '/link')") Link
         li.nav-item.dropdown
           a#navbarDropdown.nav-link.dropdown-toggle(href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
             | Dropdown
