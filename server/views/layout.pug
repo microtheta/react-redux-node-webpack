@@ -11,22 +11,18 @@ html
     if assets &&  assets['app.css']
       link(rel="stylesheet", href='/dist/'+assets['app.css'])
 
-
     style.
       body {
         background: url('/images/bg.jpg');
       }
 
   body
-    include partials/header
-
-    .container-fluid(id="root")
+    div(id="root")
       block content
         .page.row.align-items-center
           .col
             h2.text-center
               i.fa.fa-spinner.fa-pulse.fa-4x
-
 
     include partials/footer
 

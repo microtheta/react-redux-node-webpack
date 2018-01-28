@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import _ from 'lodash';
+import Header from '../Layout/Header';
+
 import '../../styles/parallax';
 
 
@@ -36,7 +38,6 @@ class Parallax extends Component {
   }
 
   parallaxScroll(evt) {
-    console.log(evt)
     if(evt.type === 'touchend') {
       this.delta = evt.changedTouches[0].clientY - this.delta;
     }
@@ -101,22 +102,25 @@ class Parallax extends Component {
   render() {
     const { sections } = this.props;
     return (
-      <div className="parallax-main">
-        {
-          sections.map((section, i) => (
-            <section key={i} className="background" style={{
-              zIndex: sections.length-i,
-              backgroundColor: section.color,
-              backgroundImage: `url(${section.image})`
-            }}>
-              <div className="content-wrapper">
-                <p className="content-title">{section.title}</p>
-                <p className="content-subtitle">{section.subtitle}</p>
-              </div>
-            </section>
-          ))
-        }
-      </div>
+      <Fragment>
+        <Header transparent />
+        <div className="parallax-main">
+          {
+            sections.map((section, i) => (
+              <section key={i} className="background" style={{
+                zIndex: sections.length-i,
+                backgroundColor: section.color,
+                backgroundImage: `url(${section.image})`
+              }}>
+                <div className="content-wrapper">
+                  <p className="content-title">{section.title}</p>
+                  <p className="content-subtitle">{section.subtitle}</p>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+      </Fragment>
     );
   }
 }

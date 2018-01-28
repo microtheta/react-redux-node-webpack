@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -49,10 +49,10 @@ export default class App extends Component {
       <Provider store={store}>
         { /* ConnectedRouter will use the store from Provider automatically */ }
         <ConnectedRouter history={history}>
-          <div>
+          <Fragment>
             <Route exact path="/" component={Home} />
             <Route path="/parallax" component={Parallax} />
-          </div>
+          </Fragment>
         </ConnectedRouter>
       </Provider>
     );
