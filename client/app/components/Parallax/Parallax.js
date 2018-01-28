@@ -81,13 +81,23 @@ class Parallax extends Component {
   }
 
   nextItem() {
-    var $previousSlide = document.getElementsByClassName("background")[this.currentSlideNumber - 1];
+    let slideNum = this.currentSlideNumber - 1;
+    if(this.currentSlideNumber - 1 < 0) {
+      slideNum = 0;
+      this.currentSlideNumber++;
+    }
+    var $previousSlide = document.getElementsByClassName("background")[slideNum];
     $previousSlide.classList.remove("up-scroll");
     $previousSlide.classList.add("down-scroll");
   }
 
   previousItem() {
-    var $currentSlide = document.getElementsByClassName("background")[this.currentSlideNumber];
+    let slideNum = this.currentSlideNumber;
+    if(this.currentSlideNumber + 1 >= this.totalSlideNumber ) {
+      slideNum = this.currentSlideNumber-1;
+      this.currentSlideNumber--;
+    }
+    var $currentSlide = document.getElementsByClassName("background")[slideNum];
     $currentSlide.classList.remove("down-scroll");
     $currentSlide.classList.add("up-scroll");
   }
@@ -115,6 +125,16 @@ class Parallax extends Component {
                 <div className="content-wrapper">
                   <p className="content-title">{section.title}</p>
                   <p className="content-subtitle">{section.subtitle}</p>
+                  {i ==0 ?
+                    <div onClick={this.nextItem} title="Scroll Down" className="scroll-indicator bounce">
+                      <i className="fa fa-angle-down fa-2x"></i>
+                    </div>
+                    : null}
+                  {i == sections.length - 1 ?
+                    <div onClick={this.previousItem} title="Scroll Up" className="scroll-indicator bounce">
+                      <i className="fa fa-angle-up fa-2x"></i>
+                    </div>
+                    : null}
                 </div>
               </section>
             ))
@@ -129,13 +149,13 @@ Parallax.defaultProps = {
   sections: [
     {
       title: 'Full Page Parallax Effect',
-      subtitle: 'croll down and up to see the effect!',
+      subtitle: 'Scroll down and up to see the effect!',
       image: 'https://s8.postimg.org/lf2udl5np/4_Aihmii.jpg',
       color: 'red'
     },
     {
-      title: 'Cras lacinia non eros nec semper.',
-      subtitle: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras ut massa mattis nibh semper pretium.',
+      title: 'Mahesh Thumar',
+      subtitle: 'Software Engineer | JavaScript Geek',
       image: 'https://s8.postimg.org/ow4wgk4px/ugqti_Lg.jpg',
       color: 'green'
     },
